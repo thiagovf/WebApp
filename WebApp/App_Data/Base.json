@@ -1,0 +1,18 @@
+[
+  {
+    "Id": 1,
+    "Nome": "Thiago",
+    "Sobrenome": "Fernandes",
+    "Telefone": "123456",
+    "Data":  "2020-01",
+    "RA": 1
+  },
+  {
+    "Id": 2,
+    "Nome": "thiago",
+    "Sobrenome": "nogueira",
+    "Telefone": "3241231234",
+    "Data":  "2019-08",
+    "RA": 2
+  }
+]

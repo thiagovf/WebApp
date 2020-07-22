@@ -1,0 +1,16 @@
+[
+  {
+    "Id": 1,
+    "Nome": "Thiago",
+    "Sobrenome": "Viana",
+    "Telefone": "2223344",
+    "DataContratacao": "0001-01-01T00:00:00"
+  },
+  {
+    "Id": 2,
+    "Nome": "Crazy",
+    "Sobrenome": "Dog",
+    "Telefone": "6533",
+    "DataContratacao": "2020-01-01T12:00:00"
+  }
+]
