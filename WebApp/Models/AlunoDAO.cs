@@ -61,8 +61,7 @@ namespace WebApp.Models
             IDbDataParameter paramRA = new SqlParameter("ra", aluno.RA);
             insertCmd.Parameters.Add(paramRA);
 
-            insertCmd.ExecuteNonQuery(); 
-
+            insertCmd.ExecuteNonQuery();
         }
     }
 }
