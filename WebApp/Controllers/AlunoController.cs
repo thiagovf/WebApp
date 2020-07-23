@@ -21,7 +21,7 @@ namespace WebApp.Controllers
             try
             {
                 Aluno aluno = new Aluno();
-                return Ok(aluno.ListarAlunosDB());
+                return Ok(aluno.ListarAlunos());
             } catch (Exception ex)
             {
                 return InternalServerError(ex);

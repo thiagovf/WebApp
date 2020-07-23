@@ -21,46 +21,18 @@ namespace WebApp.Models
 
         public List<Aluno> ListarAlunos()
         {
-            string caminhoArquivo = System.Web.Hosting.HostingEnvironment.MapPath(@"~/App_Data\Base.json");
-
-            string json = System.IO.File.ReadAllText(caminhoArquivo);
-
-            List<Aluno> listaAlunos = JsonConvert.DeserializeObject<List<Aluno>>(json);
-
-            return listaAlunos;
-        }
-
-        
-
-        public List<Aluno> ListarAlunosDB()
-        {
-            //string stringConexao = ConfigurationManager.AppSettings["ConnectionString"];
-            string stringConexao = ConfigurationManager.ConnectionStrings["ConexaoDev"].ConnectionString;
-            IDbConnection conexao;
-            conexao = new SqlConnection(stringConexao);
-            conexao.Open();
-
-            List<Aluno> alunos = new List<Aluno>();
-
-            IDbCommand selectCmd = conexao.CreateCommand();
-            selectCmd.CommandText = "select * from Alunos";
-            IDataReader resultado = selectCmd.ExecuteReader();
-            while (resultado.Read())
+            try
             {
-                Aluno alu = new Aluno();
-                alu.Id = Convert.ToInt32(resultado["Id"]);
-                alu.Nome = Convert.ToString(resultado["nome"]);
-                alu.Sobrenome = Convert.ToString(resultado["sobrenome"]);
-                alu.Telefone = Convert.ToString(resultado["telefone"]);
-                alu.RA = Convert.ToInt32(resultado["ra"]);
-
-                alunos.Add(alu);
+                AlunoDAO alunoDAO = new AlunoDAO();
+                return alunoDAO.ListarAlunosDB();
             }
+            catch (Exception e)
+            {
 
-            conexao.Close();
-
-            return alunos;
+                throw new Exception($"Erro ao listar Alunos: Erro => {e.Message}");
+            }
         }
+
 
         private bool ReescreverArquivo(List<Aluno> listaAlunos)
         {
