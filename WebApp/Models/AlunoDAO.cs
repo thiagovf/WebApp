@@ -43,5 +43,25 @@ namespace WebApp.Models
 
             return alunos;
         }
+
+        public void InserirAluno(Aluno aluno)
+        {
+            IDbCommand insertCmd = conexao.CreateCommand();
+            insertCmd.CommandText = "insert into Alunos (nome, sobrenome, telefone, ra) values (@nome, @sobrenome, @telefone, @ra)";
+
+            IDbDataParameter paramNome = new SqlParameter("nome", aluno.Nome);
+            insertCmd.Parameters.Add(paramNome);
+
+            IDbDataParameter paramSobrenome = new SqlParameter("sobrenome", aluno.Sobrenome);
+            insertCmd.Parameters.Add(paramSobrenome);
+
+            IDbDataParameter paramTelefone = new SqlParameter("telefone", aluno.Telefone);
+            insertCmd.Parameters.Add(paramTelefone);
+
+            IDbDataParameter paramRA = new SqlParameter("ra", aluno.RA);
+            insertCmd.Parameters.Add(paramRA);
+
+            insertCmd.ExecuteNonQuery();
+        }
     }
 }
