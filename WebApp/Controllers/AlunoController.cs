@@ -78,7 +78,9 @@ namespace WebApp.Controllers
         // PUT: api/Aluno/5
         public Aluno Put(int id, [FromBody]Aluno aluno)
         {
-            return aluno.Atualizar(id, aluno);
+            aluno.Atualizar(id, aluno);
+
+            return aluno.ListarAlunos().Where(a => a.Id == id).FirstOrDefault();
         }
 
         // DELETE: api/Aluno/5

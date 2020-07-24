@@ -45,50 +45,45 @@ namespace WebApp.Models
             return true;
         }
 
-        public Aluno Inserir(Aluno Aluno)
+        public void Inserir(Aluno aluno)
         {
-            List<Aluno> listaAlunos = this.ListarAlunos();
-            int maxId = listaAlunos.Max(aluno => aluno.Id);
-            Aluno.Id = maxId + 1;
-            listaAlunos.Add(Aluno);
-
-            ReescreverArquivo(listaAlunos);
-            return Aluno;
-        }
-
-        public Aluno Atualizar(int id, Aluno Aluno)
-        {
-            List<Aluno> listaAlunos = ListarAlunos();
-
-            int itemIndice = listaAlunos.FindIndex(aluno => aluno.Id == id);
-            if(itemIndice >= 0)
+            try
             {
-                Aluno.Id = id;
-                listaAlunos[itemIndice] = Aluno;
-
-                ReescreverArquivo(listaAlunos);
-            } else
+                AlunoDAO alunoDAO = new AlunoDAO();
+                alunoDAO.InserirAluno(aluno);
+            }
+            catch (Exception ex)
             {
-                Aluno = null;
+                throw new Exception($"Erro ao inserir Aluno: Erro => {ex.Message}");
             }
 
-            return Aluno;
         }
 
-        public bool Deletar(int id)
+        public void Atualizar(int id, Aluno aluno)
         {
-            bool deletou = false;
-
-            List<Aluno> listaAlunos = ListarAlunos();
-            int itemIndex = listaAlunos.FindIndex(aluno => aluno.Id == id);
-            if (itemIndex > 0)
+            try
             {
-                listaAlunos.RemoveAt(itemIndex);
-                ReescreverArquivo(listaAlunos);
-                deletou = true;
+                AlunoDAO alunoDAO = new AlunoDAO();
+                alunoDAO.AtualizarAluno(id, aluno);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao atualizar Aluno: Erro => {ex.Message}");
             }
 
-            return deletou;
+        }
+
+        public void Deletar(int id)
+        {
+            try
+            {
+                AlunoDAO alunoDAO = new AlunoDAO();
+                alunoDAO.DeletarAluno(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao deletar Auno: Erro => {ex.Message}");
+            }
         }
     }
 }

@@ -63,5 +63,40 @@ namespace WebApp.Models
 
             insertCmd.ExecuteNonQuery();
         }
+
+        public void AtualizarAluno(int id, Aluno aluno)
+        {
+            IDbCommand updateCmd = conexao.CreateCommand();
+            updateCmd.CommandText = "update Alunos set nome = @nome, sobrenome = @sobrenome, telefone = @telefone, ra = @ra where id = @id";
+
+            IDbDataParameter paramId = new SqlParameter("id", id);
+            updateCmd.Parameters.Add(paramId);
+
+            IDbDataParameter paramNome = new SqlParameter("nome", aluno.Nome);
+            updateCmd.Parameters.Add(paramNome);
+
+            IDbDataParameter paramSobrenome = new SqlParameter("sobrenome", aluno.Sobrenome);
+            updateCmd.Parameters.Add(paramSobrenome);
+
+            IDbDataParameter paramTelefone = new SqlParameter("telefone", aluno.Telefone);
+            updateCmd.Parameters.Add(paramTelefone);
+
+            IDbDataParameter paramRA = new SqlParameter("ra", aluno.RA);
+            updateCmd.Parameters.Add(paramRA);
+
+            updateCmd.ExecuteNonQuery();
+
+        }
+
+        public void DeletarAluno(int id)
+        {
+            IDbCommand deleteCmd = conexao.CreateCommand();
+            deleteCmd.CommandText = "delete from Alunos where id = @id";
+
+            IDbDataParameter paramId = new SqlParameter("id", id);
+            deleteCmd.Parameters.Add(paramId);
+
+            deleteCmd.ExecuteNonQuery();
+        }
     }
 }
