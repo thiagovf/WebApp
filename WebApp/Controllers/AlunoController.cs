@@ -20,7 +20,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                Aluno aluno = new Aluno();
+                AlunoModel aluno = new AlunoModel();
                 return Ok(aluno.ListarAlunos());
             } catch (Exception ex)
             {
@@ -35,7 +35,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                Aluno aluno = new Aluno();
+                AlunoModel aluno = new AlunoModel();
                 return Ok(aluno.ListarAlunos(id).FirstOrDefault());
             }
             catch (Exception ex)
@@ -51,8 +51,8 @@ namespace WebApp.Controllers
         {
             try
             {
-                Aluno aluno = new Aluno();
-                IEnumerable<Aluno> alunos = aluno.ListarAlunos().Where(x => x.Data == data || x.Nome == nome);
+                AlunoModel aluno = new AlunoModel();
+                IEnumerable<AlunoDTO> alunos = aluno.ListarAlunos().Where(x => x.Data == data || x.Nome == nome);
 
                 if (!alunos.Any())
                     return NotFound();
@@ -68,11 +68,11 @@ namespace WebApp.Controllers
 
         [HttpGet]
         [Route("Recuperar/{id}")]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult RecuperarPorId(int id)
         {
             try
             {
-                Aluno aluno = new Aluno();
+                AlunoModel aluno = new AlunoModel();
                 return Ok(aluno.ListarAlunos(id).FirstOrDefault());
             }
             catch (Exception ex)
@@ -83,11 +83,12 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Post([FromBody]Aluno aluno)
+        public IHttpActionResult Post([FromBody]AlunoDTO alunoDTO)
         {
             try
             {
-                aluno.Inserir(aluno);
+                AlunoModel aluno = new AlunoModel();
+                aluno.Inserir(alunoDTO);
                 return Ok(aluno.ListarAlunos());
             }
             catch (Exception ex)
@@ -97,11 +98,12 @@ namespace WebApp.Controllers
         }
 
         [HttpPut]
-        public IHttpActionResult Put(int id, [FromBody]Aluno aluno)
+        public IHttpActionResult Put(int id, [FromBody]AlunoDTO alunoDTO)
         {
             try
             {
-                aluno.Atualizar(id, aluno);
+                AlunoModel aluno = new AlunoModel();
+                aluno.Atualizar(id, alunoDTO);
                 return Ok(aluno.ListarAlunos(id).FirstOrDefault());
             }
             catch (Exception ex)
@@ -116,7 +118,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                Aluno _aluno = new Aluno();
+                AlunoModel _aluno = new AlunoModel();
                 _aluno.Deletar(id);
                 return Ok("Deletado com sucesso");
             }

@@ -20,9 +20,9 @@ namespace WebApp.Models
             conexao.Open();
         }
 
-        public List<Aluno> ListarAlunos(int? id)
+        public List<AlunoDTO> ListarAlunos(int? id)
         {
-            List<Aluno> alunos = new List<Aluno>();
+            List<AlunoDTO> alunos = new List<AlunoDTO>();
             try
             {
 
@@ -39,7 +39,7 @@ namespace WebApp.Models
                 IDataReader resultado = selectCmd.ExecuteReader();
                 while (resultado.Read())
                 {
-                    Aluno alu = new Aluno()
+                    AlunoDTO alu = new AlunoDTO()
                     {
                         Id = Convert.ToInt32(resultado["Id"]),
                         Nome = Convert.ToString(resultado["nome"]),
@@ -62,7 +62,7 @@ namespace WebApp.Models
             }
         }
 
-        public void InserirAluno(Aluno aluno)
+        public void InserirAluno(AlunoDTO aluno)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace WebApp.Models
   
         }
 
-        public void AtualizarAluno(int id, Aluno aluno)
+        public void AtualizarAluno(int id, AlunoDTO aluno)
         {
             try
             {
