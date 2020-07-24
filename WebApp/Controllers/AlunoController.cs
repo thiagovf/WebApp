@@ -64,7 +64,7 @@ namespace WebApp.Controllers
         public Aluno Get(int id)
         {
             Aluno aluno = new Aluno();
-            return aluno.ListarAlunos().Where(x => x.Id == id).FirstOrDefault();
+            return aluno.ListarAlunos(id).FirstOrDefault();
         }
 
         // POST: api/Aluno

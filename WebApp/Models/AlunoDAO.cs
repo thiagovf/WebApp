@@ -20,12 +20,20 @@ namespace WebApp.Models
             conexao.Open();
         }
 
-        public List<Aluno> ListarAlunosDB()
+        public List<Aluno> ListarAlunosDB(int? id)
         {
             List<Aluno> alunos = new List<Aluno>();
 
             IDbCommand selectCmd = conexao.CreateCommand();
-            selectCmd.CommandText = "select * from Alunos";
+            if (id == null)
+            {
+                selectCmd.CommandText = "select * from Alunos";
+            }
+            else
+            {
+                selectCmd.CommandText = $"select * from Alunos where id = {id}";
+            }
+
             IDataReader resultado = selectCmd.ExecuteReader();
             while (resultado.Read())
             {
