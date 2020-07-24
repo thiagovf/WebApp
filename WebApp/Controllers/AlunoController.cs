@@ -85,6 +85,10 @@ namespace WebApp.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]AlunoDTO alunoDTO)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 AlunoModel aluno = new AlunoModel();
