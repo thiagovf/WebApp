@@ -13,7 +13,7 @@ namespace WebApp.Controllers
     [RoutePrefix("api/Aluno")]
     public class AlunoController : ApiController
     {
-        // GET: api/Aluno
+
         [HttpGet]
         [Route("Recuperar")]
         public IHttpActionResult Recuperar()
@@ -30,11 +30,19 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
-        [Route("Recuperar/{id:int}/{nome}/{sobrenome=andrade}")]
-        public Aluno Get(int id, string nome, string sobrenome)
+        [Route("Recuperar/{id:int}/{nome?}/{sobrenome?}")]
+        public IHttpActionResult Get(int id, string nome = null, string sobrenome = null)
         {
-            Aluno aluno = new Aluno();
-            return aluno.ListarAlunos().Where(x => x.Id == id).FirstOrDefault();
+            try
+            {
+                Aluno aluno = new Aluno();
+                return Ok(aluno.ListarAlunos(id).FirstOrDefault());
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
         }
 
         [HttpGet]
@@ -58,36 +66,65 @@ namespace WebApp.Controllers
             } 
         }
 
-        // GET: api/Aluno/5
         [HttpGet]
         [Route("Recuperar/{id}")]
-        public Aluno Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            Aluno aluno = new Aluno();
-            return aluno.ListarAlunos(id).FirstOrDefault();
+            try
+            {
+                Aluno aluno = new Aluno();
+                return Ok(aluno.ListarAlunos(id).FirstOrDefault());
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
         }
 
-        // POST: api/Aluno
-        public List<Aluno> Post([FromBody]Aluno aluno)
+        [HttpPost]
+        public IHttpActionResult Post([FromBody]Aluno aluno)
         {
-            aluno.Inserir(aluno);
-
-            return aluno.ListarAlunos();
+            try
+            {
+                aluno.Inserir(aluno);
+                return Ok(aluno.ListarAlunos());
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
-        // PUT: api/Aluno/5
-        public Aluno Put(int id, [FromBody]Aluno aluno)
+        [HttpPut]
+        public IHttpActionResult Put(int id, [FromBody]Aluno aluno)
         {
-            aluno.Atualizar(id, aluno);
+            try
+            {
+                aluno.Atualizar(id, aluno);
+                return Ok(aluno.ListarAlunos(id).FirstOrDefault());
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
 
-            return aluno.ListarAlunos().Where(a => a.Id == id).FirstOrDefault();
         }
 
-        // DELETE: api/Aluno/5
-        public void Delete(int id)
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
-            Aluno _aluno = new Aluno();
-            _aluno.Deletar(id);
+            try
+            {
+                Aluno _aluno = new Aluno();
+                _aluno.Deletar(id);
+                return Ok("Deletado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
         }
     }
 }
