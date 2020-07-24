@@ -20,7 +20,7 @@ namespace WebApp.Models
             conexao.Open();
         }
 
-        public List<Aluno> ListarAlunosDB(int? id)
+        public List<Aluno> ListarAlunos(int? id)
         {
             List<Aluno> alunos = new List<Aluno>();
             try
@@ -39,12 +39,14 @@ namespace WebApp.Models
                 IDataReader resultado = selectCmd.ExecuteReader();
                 while (resultado.Read())
                 {
-                    Aluno alu = new Aluno();
-                    alu.Id = Convert.ToInt32(resultado["Id"]);
-                    alu.Nome = Convert.ToString(resultado["nome"]);
-                    alu.Sobrenome = Convert.ToString(resultado["sobrenome"]);
-                    alu.Telefone = Convert.ToString(resultado["telefone"]);
-                    alu.RA = Convert.ToInt32(resultado["ra"]);
+                    Aluno alu = new Aluno()
+                    {
+                        Id = Convert.ToInt32(resultado["Id"]),
+                        Nome = Convert.ToString(resultado["nome"]),
+                        Sobrenome = Convert.ToString(resultado["sobrenome"]),
+                        Telefone = Convert.ToString(resultado["telefone"]),
+                        RA = Convert.ToInt32(resultado["ra"])
+                    };
 
                     alunos.Add(alu);
                 }

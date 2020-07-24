@@ -24,7 +24,7 @@ namespace WebApp.Models
             try
             {
                 AlunoDAO alunoDAO = new AlunoDAO();
-                return alunoDAO.ListarAlunosDB(id);
+                return alunoDAO.ListarAlunos(id);
             }
             catch (Exception e)
             {
