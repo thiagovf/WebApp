@@ -11,9 +11,12 @@ namespace WebApp
         {
             return new List<Usuario>()
             {
-                new Usuario(){Nome = "Fulano", Senha = "123456"},
-                new Usuario(){Nome = "Beltrano", Senha = "123456"},
-                new Usuario(){Nome = "Cicrano", Senha = "123456"}
+                new Usuario(){Nome = "Fulano", Senha = "123456",
+                    Papeis = new string[] {Papel.Aluno} },
+                new Usuario(){Nome = "Beltrano", Senha = "123456",
+                    Papeis = new string[] {Papel.Professor } },
+                new Usuario(){Nome = "Cicrano", Senha = "123456",
+                    Papeis = new string [] {Papel.Professor, Papel.Administrador } }
             };
         }
     }

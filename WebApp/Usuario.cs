@@ -10,5 +10,7 @@ namespace WebApp
         public string Nome { get; set; }
 
         public string Senha { get; set; }
+
+        public string[] Papeis { get; set; }
     }
 }
