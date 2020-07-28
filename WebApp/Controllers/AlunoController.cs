@@ -15,6 +15,7 @@ namespace WebApp.Controllers
 
         [HttpGet]
         [Route("Recuperar")]
+        [Authorize]
         public IHttpActionResult Recuperar()
         {
             try

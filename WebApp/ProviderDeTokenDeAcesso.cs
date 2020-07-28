@@ -23,9 +23,13 @@ namespace WebApp
             {
                 context.SetError("invalid_grant", "Usuário ou senha inválido.");
             }
+            else
+            {
+                var identidadeUsuario = new ClaimsIdentity(context.Options.AuthenticationType);
+                context.Validated(identidadeUsuario);
+            }
 
-            var identidadeUsuario = new ClaimsIdentity(context.Options.AuthenticationType);
-            context.Validated(identidadeUsuario);
+
         }
     }
 }
